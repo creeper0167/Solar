@@ -12,8 +12,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
+
 //Database
-builder.Services.AddDbContext<SolarDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SoalDbConnectionString")));
+builder.Services.AddDbContext<SolarDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SolarDbConnectionString")));
 
 //Container
 RegisterServices(builder.Services);
@@ -23,7 +26,6 @@ void RegisterServices(IServiceCollection services)
 }
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

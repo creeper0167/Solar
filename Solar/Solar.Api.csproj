@@ -23,11 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Solar.Infrastructure\Solar.Infrastructure.csproj" />
+    <ProjectReference Include="..\Solar.Application\Solar.Application.csproj" />
   </ItemGroup>
 
 </Project>

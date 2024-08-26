@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Solar.Domain.Equipment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,6 @@ namespace Solar.Infrastructure.Context
             
         }
 
-
+        public DbSet<Equipment> Equipments { get; set; }
     }
 }
