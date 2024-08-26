@@ -24,12 +24,7 @@ namespace Solar.Application
 
         public void Add(EquipmentDTO equipmentDTO)
         {
-            var equipment = new Equipment()
-            {
-                Description = equipmentDTO.Description,
-                PictureAddress = equipmentDTO.PictureAddress,
-                PowerType = equipmentDTO.PowerType,
-            };
+            var equipment = _mapper.Map<Equipment>(equipmentDTO);
             _equipmentRepository.InsertAsync(equipment);
 
         }
