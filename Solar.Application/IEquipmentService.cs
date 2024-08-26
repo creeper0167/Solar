@@ -10,5 +10,7 @@ namespace Solar.Application
     public interface IEquipmentService
     {
         IEnumerable<EquipmentDTO> GetAll();
+        void Add(EquipmentDTO equipment);
+        void SaveChanges();
     }
 }

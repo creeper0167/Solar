@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace Solar.Application.AutoMapper
 {
-    public class MapperProfile:Profile
+    public class MapperProfile : Profile
     {
         public MapperProfile()
         {
+            CreateMap<EquipmentDTO, Equipment>();
             CreateMap<Equipment, EquipmentDTO>();
         }
     }

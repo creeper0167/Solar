@@ -10,5 +10,7 @@ namespace Solar.Infrastructure.Repository.Interface
     public interface IEquipmentRepository
     {
         IEnumerable<Equipment> GetAll();
+        void InsertAsync(Equipment equipment);
+        void SaveChanges();
     }
 }

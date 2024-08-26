@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Solar.Application;
+using Solar.Application.DTOs;
 
 namespace Solar.Api.Controllers
 {
@@ -20,6 +21,17 @@ namespace Solar.Api.Controllers
             return Ok(new
             {
                 result = result,
+                status = 200
+            });
+        }
+
+        [HttpPost("AddEquipment")]
+        public async Task<IActionResult> Add(EquipmentDTO equipmentDTO)
+        {
+            _equipmentService.Add(equipmentDTO);
+            _equipmentService.SaveChanges();
+            return Ok(new
+            {
                 status = 200
             });
         }

@@ -20,5 +20,15 @@ namespace Solar.Infrastructure.Repository
         {
             return _context.Equipments;        
         }
+
+        public void InsertAsync(Equipment equipment)
+        {
+            _context.Equipments.AddAsync(equipment);
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
     }
 }

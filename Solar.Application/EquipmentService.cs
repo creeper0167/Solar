@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Solar.Infrastructure.Repository.Interface;
 using AutoMapper;
+using Solar.Domain.Equipment;
 
 namespace Solar.Application
 {
@@ -20,9 +21,27 @@ namespace Solar.Application
             _equipmentRepository = equipmentRepository;
             _mapper = mapper;
         }
+
+        public void Add(EquipmentDTO equipmentDTO)
+        {
+            var equipment = new Equipment()
+            {
+                Description = equipmentDTO.Description,
+                PictureAddress = equipmentDTO.PictureAddress,
+                PowerType = equipmentDTO.PowerType,
+            };
+            _equipmentRepository.InsertAsync(equipment);
+
+        }
+
         public IEnumerable<EquipmentDTO> GetAll()
         {
             return _mapper.Map<List<EquipmentDTO>>(_equipmentRepository.GetAll());
+        }
+
+        public void SaveChanges()
+        {
+            _equipmentRepository.SaveChanges();
         }
     }
 }
