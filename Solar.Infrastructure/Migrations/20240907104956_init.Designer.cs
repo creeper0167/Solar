@@ -11,7 +11,7 @@ using Solar.Infrastructure.Context;
 namespace Solar.Infrastructure.Migrations
 {
     [DbContext(typeof(SolarDbContext))]
-    [Migration("20240826072400_init")]
+    [Migration("20240907104956_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -46,6 +46,39 @@ namespace Solar.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Equipments");
+                });
+
+            modelBuilder.Entity("Solar.Domain.User.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }
