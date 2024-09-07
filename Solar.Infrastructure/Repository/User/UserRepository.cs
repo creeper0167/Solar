@@ -25,4 +25,14 @@ public class UserRepository : IUserRepository
     {
         return _context.Users.Where(i => string.Compare(i.Email, userEmail) == 0).FirstOrDefault();
     }
+
+    public void InsertAsync(Domain.User.User user)
+    {
+        _context.Users.AddAsync(user);
+    }
+
+    public void SaveChanges()
+    {
+        _context.SaveChanges();
+    }
 }

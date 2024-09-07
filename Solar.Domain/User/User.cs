@@ -10,5 +10,6 @@ public class User : BaseEntity
     public string Email { get; set; }
     [DataType(DataType.Password)]
     public string Password { get; set; }
-    public string RefreshToken { get; set; }
+    public string RefreshToken { get; set; } = string.Empty;
+    public bool EmailConfirmed { get; set; } = false;
 }

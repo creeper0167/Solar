@@ -14,6 +14,7 @@ public class AuthenticationController : Controller
     {
         _userService = userService;
     }
+
     // POST
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] LoginDTO user)
@@ -25,6 +26,13 @@ public class AuthenticationController : Controller
         {
             message= "login"
         });
+    }
+    
+    [HttpPost("Register")]
+    public async Task<IActionResult> Register([FromBody] RegisterRequestDTO requestDTO)
+    {
+        _userService.Register(requestDTO);
+        return Ok();
     }
     
 }

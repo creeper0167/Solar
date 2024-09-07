@@ -45,4 +45,11 @@ public class UserService : IUserService
             RefreshToken = "refresh"
         };
     }
+
+    public void Register(RegisterRequestDTO requestDTO)
+    {
+        var user = _mapper.Map<Domain.User.User>(requestDTO);
+        _userRepository.InsertAsync(user);
+        _userRepository.SaveChanges();
+    }
 }
