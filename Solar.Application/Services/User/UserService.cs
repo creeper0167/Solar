@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System.Security.Cryptography;
+using System.Text;
+using AutoMapper;
 using Solar.Application.DTOs.User;
 using Solar.Application.Services.Interfaces.User;
 using Solar.Infrastructure.Repository.Interface.User;
@@ -28,7 +30,7 @@ public class UserService : IUserService
         if (user == null)
             return false;
         
-        if (string.Compare(user.Password, password) != 0) //password not match
+        if (string.Compare(user.Password, GenerateHashPassword(password)) != 0) //password not match
         {
             return false;
         }
@@ -49,7 +51,25 @@ public class UserService : IUserService
     public void Register(RegisterRequestDTO requestDTO)
     {
         var user = _mapper.Map<Domain.User.User>(requestDTO);
+        user.Password = GenerateHashPassword(user.Password);
         _userRepository.InsertAsync(user);
         _userRepository.SaveChanges();
+    }
+    private string GenerateHashPassword(string password)
+    {
+        // Create a SHA256
+        using (SHA256 sha256Hash = SHA256.Create())
+        {
+            // ComputeHash - returns byte array
+            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+            // Convert byte array to a string
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                builder.Append(bytes[i].ToString("x2"));
+            }
+            return builder.ToString();
+        }
     }
 }
