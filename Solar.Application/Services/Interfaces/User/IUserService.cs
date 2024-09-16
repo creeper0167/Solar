@@ -8,4 +8,6 @@ public interface IUserService
     bool IsValidUser(string userEmail, string password);
     LoginResponseDTO GetUserByEmail(string userEmail);
     void Register(RegisterRequestDTO requestDTO);
+    bool IsEmailConfirmed(string userEmail);
+
 }

@@ -20,19 +20,29 @@ public class AuthenticationController : Controller
     public async Task<IActionResult> Login([FromBody] LoginDTO user)
     {
         if (!_userService.IsValidUser(user.Email, user.Password))
-            return Unauthorized(new {status = 401});
+            return Unauthorized(new 
+            {
+                status = 401 
+                });
+        if (!_userService.IsEmailConfirmed(user.Email))
+            return Unauthorized(new
+            {
+                message = "Email is not confirmed yet",
+                status = 401
+            });
+
         var result = _userService.GetUserByEmail(user.Email);
         return Ok(new
         {
-            message= "login"
+            message = "login"
         });
     }
-    
+
     [HttpPost("Register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequestDTO requestDTO)
     {
         _userService.Register(requestDTO);
         return Ok();
     }
-    
+
 }
