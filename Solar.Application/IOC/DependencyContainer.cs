@@ -11,6 +11,8 @@ using Solar.Application.Services.Interfaces.User;
 using Solar.Application.Services.User;
 using Solar.Infrastructure.Repository.Interface.User;
 using Solar.Infrastructure.Repository.User;
+using Solar.Application.Services.Interfaces;
+using Solar.Application.Services;
 
 namespace Solar.Infrastructure.IOC
 {
@@ -21,7 +23,7 @@ namespace Solar.Infrastructure.IOC
             //services
             service.AddScoped<IEquipmentService, EquipmentService>();
             service.AddScoped<IUserService, UserService>();
-
+            service.AddScoped<IEmailService, EmailService>();
             //repositories
             service.AddScoped<IEquipmentRepository, EquipmentRepository>();
             service.AddScoped<IUserRepository, UserRepository>();

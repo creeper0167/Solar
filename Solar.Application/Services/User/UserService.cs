@@ -1,6 +1,8 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using AutoMapper;
+using MailKit.Net.Smtp;
+using MimeKit;
 using Solar.Application.DTOs.User;
 using Solar.Application.Services.Interfaces.User;
 using Solar.Infrastructure.Repository.Interface.User;
@@ -52,9 +54,12 @@ public class UserService : IUserService
     {
         var user = _mapper.Map<Domain.User.User>(requestDTO);
         user.Password = GenerateHashPassword(user.Password);
+        user.EmailConfirmText = Guid.NewGuid().ToString();
+
         _userRepository.InsertAsync(user);
         _userRepository.SaveChanges();
     }
+
     private string GenerateHashPassword(string password)
     {
         // Create a SHA256
@@ -71,5 +76,19 @@ public class UserService : IUserService
             }
             return builder.ToString();
         }
+    }
+
+    public bool IsEmailConfirmed(string email)
+    {
+        var user = _userRepository.GetByUserEmail(email);
+        if(user.EmailConfirmed == false)
+            return false;
+        return true;
+    }
+
+    public void ConfirmEmail(string userEmail)
+    {
+        var user = _userRepository.GetByUserEmail(userEmail);
+        user.EmailConfirmed = true;
     }
 }

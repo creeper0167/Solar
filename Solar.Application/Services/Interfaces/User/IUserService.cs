@@ -6,6 +6,8 @@ public interface IUserService
 {
     IEnumerable<LoginResponseDTO> GetAll();
     bool IsValidUser(string userEmail, string password);
+    bool IsEmailConfirmed(string email);
     LoginResponseDTO GetUserByEmail(string userEmail);
     void Register(RegisterRequestDTO requestDTO);
+    void ConfirmEmail(string userEmail);
 }

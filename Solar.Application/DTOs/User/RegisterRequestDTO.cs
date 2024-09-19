@@ -12,6 +12,7 @@ namespace Solar.Application.DTOs.User
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; }
         public string Password { get; set; }
+        public string EmailConfirmText { get; set; } = Guid.NewGuid().ToString();
 
     }
 }
