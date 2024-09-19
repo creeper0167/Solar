@@ -62,7 +62,7 @@ public class UserService : IUserService
         _userRepository.InsertAsync(user);
         _userRepository.SaveChanges();
 
-        _emailService.SendEmail(user.EmailConfirmText);
+        _emailService.SendEmail(user.Email, user.EmailConfirmText);
     }
 
     private string GenerateHashPassword(string password)
@@ -103,6 +103,7 @@ public class UserService : IUserService
             _userRepository.SaveChanges();
             return true;
         }
+
         return false;
     }
 }
