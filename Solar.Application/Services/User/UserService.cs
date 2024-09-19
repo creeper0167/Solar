@@ -40,6 +40,15 @@ public class UserService : IUserService
         return true;
     }
 
+    public bool IsEmailConfirmed(string userEmail)
+    {
+        var user = _userRepository.GetByUserEmail(userEmail);
+        if (user.EmailConfirmed == true)
+            return true;
+        return false;
+
+    }
+
     public LoginResponseDTO GetUserByEmail(string userEmail)
     {
         var response = _userRepository.GetByUserEmail(userEmail);
