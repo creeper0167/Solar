@@ -36,35 +36,31 @@ public class AuthenticationController : Controller
         var result = _userService.GetUserByEmail(user.Email);
         return Ok(new
         {
-            message= "login"
+            message = "login"
         });
     }
-    
+
     [HttpPost("Register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequestDTO requestDTO)
     {
         _userService.Register(requestDTO);
-        //_userService.Generate
-        _emailService.SendEmail();
+        
+
         return Ok();
     }
 
     [HttpGet("ConfirmEmail")]
-    public IActionResult ConfirmEmail(string userEmail)
+    public IActionResult ConfirmEmail(string userEmail, string verifyEmailText)
     {
-        _userService.ConfirmEmail(userEmail);
+        if(_userService.ConfirmEmail(userEmail, verifyEmailText))
+            return Ok(new
+            {
+                message = "Email Confirmed!"
+            });
+
         return Ok(new
         {
-            message = "Email Confirmed!"
+            message = "Your code is incorrect"
         });
-    }
-
-    //Test Email sender
-    [HttpPost]
-    public IActionResult SendEmail()
-    {
-        _emailService.SendEmail();
-
-        return Ok();
     }
 }

@@ -4,6 +4,7 @@ using AutoMapper;
 using MailKit.Net.Smtp;
 using MimeKit;
 using Solar.Application.DTOs.User;
+using Solar.Application.Services.Interfaces;
 using Solar.Application.Services.Interfaces.User;
 using Solar.Infrastructure.Repository.Interface.User;
 
@@ -13,8 +14,10 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
-    public UserService(IUserRepository userRepository, IMapper mapper)
+    private readonly IEmailService _emailService;
+    public UserService(IUserRepository userRepository, IMapper mapper, IEmailService emailService)
     {
+        _emailService = emailService;
         _mapper = mapper;
         _userRepository = userRepository;
     }
@@ -25,28 +28,19 @@ public class UserService : IUserService
         return result;
     }
 
-    public bool IsValidUser(string userEmail,string password)
+    public bool IsValidUser(string userEmail, string password)
     {
         var user = _userRepository.GetByUserEmail(userEmail);
-        
+
         if (user == null)
             return false;
-        
+
         if (string.Compare(user.Password, GenerateHashPassword(password)) != 0) //password not match
         {
             return false;
         }
-        
+
         return true;
-    }
-
-    public bool IsEmailConfirmed(string userEmail)
-    {
-        var user = _userRepository.GetByUserEmail(userEmail);
-        if (user.EmailConfirmed == true)
-            return true;
-        return false;
-
     }
 
     public LoginResponseDTO GetUserByEmail(string userEmail)
@@ -67,6 +61,8 @@ public class UserService : IUserService
 
         _userRepository.InsertAsync(user);
         _userRepository.SaveChanges();
+
+        _emailService.SendEmail(user.EmailConfirmText);
     }
 
     private string GenerateHashPassword(string password)
@@ -90,14 +86,23 @@ public class UserService : IUserService
     public bool IsEmailConfirmed(string email)
     {
         var user = _userRepository.GetByUserEmail(email);
-        if(user.EmailConfirmed == false)
+        if (user.EmailConfirmed == false)
             return false;
         return true;
     }
 
-    public void ConfirmEmail(string userEmail)
+    public bool ConfirmEmail(string userEmail, string verifyEmailText)
     {
         var user = _userRepository.GetByUserEmail(userEmail);
-        user.EmailConfirmed = true;
+        if(user == null)
+            return false;
+
+        if (String.Compare(verifyEmailText, user.EmailConfirmText) == 0)
+        {
+            user.EmailConfirmed = true;
+            _userRepository.SaveChanges();
+            return true;
+        }
+        return false;
     }
 }

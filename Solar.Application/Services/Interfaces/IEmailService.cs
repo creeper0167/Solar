@@ -8,6 +8,6 @@ namespace Solar.Application.Services.Interfaces
 {
     public interface IEmailService
     {
-        void SendEmail();
+        void SendEmail(string body);
     }
 }

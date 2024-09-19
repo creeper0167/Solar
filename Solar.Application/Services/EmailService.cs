@@ -12,13 +12,13 @@ namespace Solar.Application.Services
 {
     public class EmailService : IEmailService
     {
-        public void SendEmail()
+        public void SendEmail(string body)
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("shyann.swift17@ethereal.email"));
             email.To.Add(MailboxAddress.Parse("shyann.swift17@ethereal.email"));
             email.Subject = "Test EMail";
-            email.Body = new TextPart(TextFormat.Html) { Text = "<h1>Hello World2</h1>" };
+            email.Body = new TextPart(TextFormat.Html) { Text = "<h1>" + body + "</h1>" };
 
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.ethereal.email", 587, MailKit.Security.SecureSocketOptions.StartTls);

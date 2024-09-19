@@ -9,5 +9,5 @@ public interface IUserService
     bool IsEmailConfirmed(string email);
     LoginResponseDTO GetUserByEmail(string userEmail);
     void Register(RegisterRequestDTO requestDTO);
-    void ConfirmEmail(string userEmail);
+    bool ConfirmEmail(string userEmail, string verifyEmailText);
 }
