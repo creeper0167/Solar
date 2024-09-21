@@ -12,5 +12,6 @@ namespace Solar.Application
         IEnumerable<EquipmentDTO> GetAll();
         void Add(EquipmentDTO equipment);
         void SaveChanges();
+        Task<object> FetchData();
     }
 }
