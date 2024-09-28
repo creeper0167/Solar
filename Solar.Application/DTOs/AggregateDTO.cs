@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Solar.Application.DTOs
 {
-    public class ValueDTO
+    public class AggregateDTO
     {
-        public decimal Total { get; set; }
+        public string PvSystemId { get; set; }
+        public DataDTO Data { get; set; }
     }
 }
