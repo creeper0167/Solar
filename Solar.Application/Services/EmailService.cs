@@ -22,7 +22,7 @@ namespace Solar.Application.Services
 
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.ethereal.email", 587, MailKit.Security.SecureSocketOptions.StartTls);
-            smtp.Authenticate("shyann.swift17@ethereal.email", "qQtmXTHHsv13AJsMpm");
+            smtp.Authenticate("layne3@ethereal.email", "ufQhJ19rAgPCduD6N6");
             smtp.Send(email);
             smtp.Disconnect(true);
         }
