@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Solar.Application.DTOs;
+using Solar.Application.Services.Interface;
 using System.Text.Json;
 
 namespace Solar.Api.Controllers
@@ -9,10 +10,10 @@ namespace Solar.Api.Controllers
     [ApiController]
     public class AggregatedController : Controller
     {
-        IMapper _mapper;
-        public AggregatedController(IMapper mapper)
+        IAggregateService _aggregateService;
+        public AggregatedController(IAggregateService aggregateService)
         {
-            _mapper = mapper;
+            _aggregateService = aggregateService;
         }
 
         [HttpGet]
@@ -25,9 +26,22 @@ namespace Solar.Api.Controllers
             request.Headers.Add("Cookie", "TS0153f740=015bdaa2681a68d1b91a5d15f2a7f4927a288e719e05f04c36c10e6431d8fdccc855122fe1c2c8a94cf84a1f2787644b3428d9fc973317674d6539b7de0224ad99efa9b98e; lbc=!A+UCnHkEx0yLlYzhmGaVQc9UUUixhFP+b7c8O7O135zly11uKiBZVqS8tE3XvEmET8RWGyq46LSHRotE5Mk0qGhWsMNiW+tOTwmsk72AWnM=");
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
-            //Console.WriteLine(await response.Content.ReadAsStringAsync());
-            var result = response.Content.ReadFromJsonAsync<AggregateDTO>().Result;
 
+            var result = response.Content.ReadFromJsonAsync<AggregateDTO>().Result;
+            var pvSystemId = result.PvSystemId;
+
+            foreach (var item in result.Data.Channels)
+            {
+                AggregateSubmitDTO aggregateDTO = new AggregateSubmitDTO();
+                aggregateDTO.PvSystemId = pvSystemId;
+                aggregateDTO.ChannelName = item.ChannelName;
+                aggregateDTO.ChannelType = item.ChannelType;
+                aggregateDTO.Unit = item.Unit;
+                aggregateDTO.Total = item.Values.Total;
+
+                _aggregateService.AddAggregate(aggregateDTO);
+                _aggregateService.SaveChanges();
+            }
 
             return Ok(result);
         }
