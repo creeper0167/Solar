@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Solar.Domain.Agg;
 using Solar.Domain.Equipment;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,6 @@ namespace Solar.Infrastructure.Context
         }
 
         public DbSet<Equipment> Equipments { get; set; }
+        public DbSet<Aggregate> Aggregates { get; set; }
     }
 }
