@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Solar.Domain.User;
 
 namespace Solar.Infrastructure.Context
 {
@@ -17,6 +18,10 @@ namespace Solar.Infrastructure.Context
         }
 
         public DbSet<Equipment> Equipments { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
         public DbSet<Aggregate> Aggregates { get; set; }
+
     }
 }

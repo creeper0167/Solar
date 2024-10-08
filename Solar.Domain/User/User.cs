@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace Solar.Domain.User
+namespace Solar.Domain.User;
+
+public class User : BaseEntity
 {
-    public class User : BaseEntity
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Addres {  get; set; }
-        public string Email { get; set; }
-        public string key1 { get; set; }
-        public string key2 { get; set; }
-        public string Zipcode { get; set; }
-        public int Keymessage { get; set; }
-    }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    [DataType(DataType.EmailAddress)]
+    public string Email { get; set; }
+    [DataType(DataType.Password)]
+    public string Password { get; set; }
+    public string RefreshToken { get; set; } = string.Empty;
+    public bool EmailConfirmed { get; set; } = false;
+    public string EmailConfirmText { get; set; } = "";
 }
+
