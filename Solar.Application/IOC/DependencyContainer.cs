@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Solar.Application;
+using Solar.Application.Services.Interface;
+using Solar.Application.Services.Service;
 using Solar.Infrastructure.Repository;
 using Solar.Infrastructure.Repository.Interface;
 using System;
@@ -22,11 +24,19 @@ namespace Solar.Infrastructure.IOC
         {
             //services
             service.AddScoped<IEquipmentService, EquipmentService>();
+
             service.AddScoped<IUserService, UserService>();
             service.AddScoped<IEmailService, EmailService>();
             //repositories
             service.AddScoped<IEquipmentRepository, EquipmentRepository>();
             service.AddScoped<IUserRepository, UserRepository>();
+
+            service.AddScoped<IAggregateService, AggregateService>();
+
+            //repositories
+            service.AddScoped<IEquipmentRepository, EquipmentRepository>();
+            service.AddScoped<IAggregateRepository, AggregateRepository>();
+
         }
     }
 }

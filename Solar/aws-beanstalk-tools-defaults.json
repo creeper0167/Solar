@@ -6,17 +6,10 @@
     "self-contained" : false,
     "application"    : "SolarApi",
     "environment"    : "SolarApi-development",
+    "app-path"       : "/",
+    "iis-website"    : "Default Web Site",
     "enable-xray"    : false,
     "enhanced-health-type" : "basic",
-    "additional-options"   : "",
-    "solution-stack"       : "64bit Windows Server Core 2022 v2.15.4 running IIS 10.0",
-    "environment-type"     : "SingleInstance",
-    "cname"                : "solarapi-development1",
-    "instance-type"        : "t3a.medium",
-    "key-pair"             : "solar-dev",
-    "instance-profile"     : "aws-elasticbeanstalk-ec2-role",
-    "service-role"         : "aws-elasticbeanstalk-service-role",
-    "proxy-server"         : "nginx",
-    "app-path"             : "/",
-    "iis-website"          : "Default Web Site"
+    "additional-options"   : ""
+
 }

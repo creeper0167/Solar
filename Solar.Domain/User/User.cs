@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Solar.Domain.User;
 
@@ -14,3 +14,4 @@ public class User : BaseEntity
     public bool EmailConfirmed { get; set; } = false;
     public string EmailConfirmText { get; set; } = "";
 }
+
