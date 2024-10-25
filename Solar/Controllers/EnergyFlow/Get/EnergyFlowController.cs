@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Solar.Api.Controllers.EnergyFlow.Get
+
 {
     [ApiController]
     [Route("api")]
