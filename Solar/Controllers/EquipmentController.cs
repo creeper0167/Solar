@@ -35,5 +35,15 @@ namespace Solar.Api.Controllers
                 status = 200
             });
         }
+        [HttpGet("FetchData")]
+        public async Task<IActionResult> FetchData()
+        {
+            var result = _equipmentService.FetchData();
+            return Ok(new
+            {
+                result = result,
+                status = 200
+            });
+        }
     }
 }
