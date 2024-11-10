@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Solar.Application.DTOs.EnergyFlow
 {
-    public class EnergyFlowDataDTO
+    public class LogDateTimeDTO
     {
-        public string logDateTime { get; set; }
-        public List<ChannelDTO> Channels { get; set; }
     }
 }

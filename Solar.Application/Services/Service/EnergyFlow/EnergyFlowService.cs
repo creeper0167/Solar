@@ -1,16 +1,25 @@
-﻿using Solar.Application.DTOs.EnergyFlow;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Solar.Application.DTOs.EnergyFlow;
 using Solar.Application.Services.Interfaces.EnergyFlow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Solar.Application.Services.Service.EnergyFlow
 {
+    
     public class EnergyFlowService : IEnergyFlowService
     {
-        public async Task<EnergyFlowDataDTO> GetFlowData()
+        private readonly IMapper _mapper;
+        public EnergyFlowService(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+        public async Task<ActionResult<EnergyFlowDTO>> GetFlowData()
         {
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get, "https://api.solarweb.com/swqapi/pvsystems/8a5788a9-987a-4413-976d-691dd9c13aeb/flowdata");
@@ -21,7 +30,9 @@ namespace Solar.Application.Services.Service.EnergyFlow
             response.EnsureSuccessStatusCode();
             Console.WriteLine(await response.Content.ReadAsStringAsync());
 
-            var result = await response.Content.ReadAsStringAsync();
+            var result = response.Content.ReadFromJsonAsync<EnergyFlowDTO>().Result;
+            var pvSystemId = result.PvSystemId;
+
             return result;
         }
     }

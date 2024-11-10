@@ -1,4 +1,5 @@
-﻿using Solar.Application.DTOs.EnergyFlow;
+﻿using Microsoft.AspNetCore.Mvc;
+using Solar.Application.DTOs.EnergyFlow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Solar.Application.Services.Interfaces.EnergyFlow
 {
     public interface IEnergyFlowService
     {
-        public Task<EnergyFlowDataDTO> GetFlowData();
+        public Task<ActionResult<EnergyFlowDTO>> GetFlowData();
     }
 }
