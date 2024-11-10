@@ -33,7 +33,8 @@ namespace Solar.Infrastructure.Migrations
                 name: "EnergyFlowDatas",
                 columns: table => new
                 {
-                    PvSystemId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ChannelName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ChannelType = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -41,7 +42,7 @@ namespace Solar.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EnergyFlowDatas", x => x.PvSystemId);
+                    table.PrimaryKey("PK_EnergyFlowDatas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(

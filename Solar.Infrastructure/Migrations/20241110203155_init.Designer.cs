@@ -12,7 +12,7 @@ using Solar.Infrastructure.Context;
 namespace Solar.Infrastructure.Migrations
 {
     [DbContext(typeof(SolarDbContext))]
-    [Migration("20241110193908_init")]
+    [Migration("20241110203155_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -62,8 +62,11 @@ namespace Solar.Infrastructure.Migrations
 
             modelBuilder.Entity("Solar.Domain.EnergyFlow.EnergyFlowData", b =>
                 {
-                    b.Property<string>("PvSystemId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ChannelName")
                         .IsRequired()
@@ -80,7 +83,7 @@ namespace Solar.Infrastructure.Migrations
                     b.Property<decimal>("Value")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("PvSystemId");
+                    b.HasKey("Id");
 
                     b.ToTable("EnergyFlowDatas");
                 });

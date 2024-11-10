@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Solar.Application.DTOs.EnergyFlow;
 using Solar.Application.Services.Interfaces.EnergyFlow;
+using Solar.Domain.EnergyFlow;
+using Solar.Infrastructure.Repository.Interface.EnergyFlow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +16,12 @@ namespace Solar.Application.Services.Service.EnergyFlow
     
     public class EnergyFlowService : IEnergyFlowService
     {
+        private readonly IEnergyFlowRepository _energyFlowRepository;
         private readonly IMapper _mapper;
-        public EnergyFlowService(IMapper mapper)
+        public EnergyFlowService(IMapper mapper, IEnergyFlowRepository energyFlowRepository)
         {
             _mapper = mapper;
+            _energyFlowRepository = energyFlowRepository;
         }
         public async Task<ActionResult<EnergyFlowDTO>> GetFlowData()
         {
@@ -28,12 +32,28 @@ namespace Solar.Application.Services.Service.EnergyFlow
             request.Headers.Add("Cookie", "TS0153f740=015bdaa268f1faa4c5b5171877532276edce97fad153d47339a748434f492940804f0dd4e810c07c9d88d87e4e67939e02de3e984821cd2228d46df6d0dfec79c610a29634; lbc=!So3fDAe2tZ1yyFIrENFjkLE5nH6cEnkwif/hFmyPQc1+utizL9V9hY+nur80U3+bJt9t+4zCazItsvgMp6P12IAaoJLzOsTTsBV2ouKhku8=");
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
-            Console.WriteLine(await response.Content.ReadAsStringAsync());
 
             var result = response.Content.ReadFromJsonAsync<EnergyFlowDTO>().Result;
             var pvSystemId = result.PvSystemId;
 
-            return result;
+            
+            foreach (var item in result.Data.Channels)
+            {
+                var energyFlow = new EnergyFlowData();
+                energyFlow.ChannelName = item.ChannelName;
+                energyFlow.ChannelType = item.ChannelType;
+                energyFlow.Value = 0;
+                energyFlow.Unit = item.Unit;
+                try
+                {
+                    _energyFlowRepository.Add(energyFlow);
+                    
+                    _energyFlowRepository.SaveChanges();
+                }
+                catch (Exception e) { }
+            }
+
+                return result;
         }
     }
 }

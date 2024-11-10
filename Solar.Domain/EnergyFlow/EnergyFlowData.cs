@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Solar.Domain.EnergyFlow
 {
-    public class EnergyFlowData
+    public class EnergyFlowData : BaseEntity
     {
-        [Key]
-        public string PvSystemId { get; set; }
         public string ChannelName { get; set; }
         public string Unit { get; set; }    
         public string ChannelType { get; set; }
         public decimal Value { get; set; }
+        
     }
 }
