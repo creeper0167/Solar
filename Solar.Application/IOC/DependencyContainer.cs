@@ -17,6 +17,8 @@ using Solar.Application.Services.Interfaces;
 using Solar.Application.Services;
 using Solar.Application.Services.Interfaces.EnergyFlow;
 using Solar.Application.Services.Service.EnergyFlow;
+using Solar.Infrastructure.Repository.Interface.EnergyFlow;
+using Solar.Infrastructure.Repository.EnergyFlow;
 
 namespace Solar.Infrastructure.IOC
 {
@@ -40,6 +42,8 @@ namespace Solar.Infrastructure.IOC
             //repositories
             service.AddScoped<IEquipmentRepository, EquipmentRepository>();
             service.AddScoped<IAggregateRepository, AggregateRepository>();
+
+            service.AddScoped<IEnergyFlowRepository, EnergyFlowRepository>();
 
         }
     }

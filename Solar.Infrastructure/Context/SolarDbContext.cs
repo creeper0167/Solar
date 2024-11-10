@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Solar.Domain.User;
+using Solar.Domain.EnergyFlow;
 
 namespace Solar.Infrastructure.Context
 {
@@ -22,6 +23,8 @@ namespace Solar.Infrastructure.Context
         public DbSet<User> Users { get; set; }
 
         public DbSet<Aggregate> Aggregates { get; set; }
+
+        public DbSet<EnergyFlowData> EnergyFlowDatas { get; set; }
 
     }
 }

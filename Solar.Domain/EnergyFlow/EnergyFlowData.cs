@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Solar.Domain.EnergyFlow
 {
-    public class EnergyFlow : BaseEntity
+    public class EnergyFlowData
     {
         [Key]
         public string PvSystemId { get; set; }
