@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Solar.Application.Services.Interfaces.EnergyFlow;
 
 namespace Solar.Api.Controllers.EnergyFlow.Get
 
@@ -7,10 +8,19 @@ namespace Solar.Api.Controllers.EnergyFlow.Get
     [Route("api")]
     public class EnergyFlowController : Controller
     {
-        [HttpGet("EnergyFlow")]
-        public IActionResult Get()
+        private readonly IEnergyFlowService _energyFlowService;
+        public EnergyFlowController(IEnergyFlowService energyFlowService)
         {
-            return View();
+            _energyFlowService = energyFlowService;
+        }
+        [HttpGet("EnergyFlow")]
+        public async Task<IActionResult> Get()
+        {
+            var results = _energyFlowService.GetFlowData();
+            return Ok(new
+            {
+                result = results
+            });
         }
     }
 }
