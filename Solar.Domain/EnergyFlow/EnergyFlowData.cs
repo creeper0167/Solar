@@ -13,6 +13,5 @@ namespace Solar.Domain.EnergyFlow
         public string Unit { get; set; }    
         public string ChannelType { get; set; }
         public decimal Value { get; set; }
-        
     }
 }
