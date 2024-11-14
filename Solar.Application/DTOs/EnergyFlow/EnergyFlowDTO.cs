@@ -8,15 +8,7 @@ namespace Solar.Application.DTOs.EnergyFlow
 {
     public class EnergyFlowDTO
     {
-        public decimal? PowerFeedIn { get; set; }
-        public decimal? PowerLoad { get; set; }
-        public decimal? PowerBattCharge { get; set; }
-        public decimal? PowerPV { get; set; }
-        public decimal? PowerOutput { get; set; }
-        public decimal? BattSOC { get; set; }
-        public decimal? RateSelfConsumption { get; set; }
-        public decimal? RateSelfSufficiency { get; set; }
-        public decimal? PowerEVCTotal { get; set; }
-        public decimal? PowerOhmpilot { get; set; }
+        public string PvSystemId { get; set; }
+        public EnergyFlowDataDTO Data { get; set; }
     }
 }
