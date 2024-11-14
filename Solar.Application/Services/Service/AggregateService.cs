@@ -20,12 +20,19 @@ namespace Solar.Application.Services.Service
             _aggregateRepository = aggregateRepository;
             _mapper = mapper;
         }
-        public void AddAggregate(AggregateSubmitDTO aggregate)
+        public void AddAggregate(AggregateSubmitDTO aggregateDTO)
         {
-            var result = _mapper.Map<Aggregate>(aggregate);
-            result.RequestDate = DateTime.Now;
+            Aggregate aggregate = new Aggregate();
+            var result = _mapper.Map<Aggregate>(aggregateDTO);
+            result.LogDateTime = DateTime.Now;
             _aggregateRepository.Add(result);
         }
+        //public void AddAggregate(AggregateSubmitDTO aggregate)
+        //{
+        //    var result = _mapper.Map<Aggregate>(aggregate);
+        //    result.LogDateTime = DateTime.Now;
+        //    _aggregateRepository.Add(result);
+        //}
 
         public void SaveChanges()
         {

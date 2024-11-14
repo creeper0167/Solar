@@ -14,11 +14,10 @@ namespace Solar.Application.AutoMapper
     {
         public MapperProfile()
         {
-            CreateMap<EquipmentDTO, Equipment>();
-            CreateMap<Equipment, EquipmentDTO>();
+            CreateMap<EquipmentDTO, Equipment>().ReverseMap();
 
-            CreateMap<AggregateSubmitDTO, Aggregate>();
-            CreateMap<Aggregate, AggregateSubmitDTO>();
+            CreateMap<AggregateSubmitDTO, Aggregate>().ReverseMap();
+            
         }
     }
 }

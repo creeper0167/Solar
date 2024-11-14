@@ -30,27 +30,51 @@ namespace Solar.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ChannelName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Earnings")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ChannelType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("EnergyConsumptionTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("EnergyDirectConsumption")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("EnergyOutput")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("EnergyProductionTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("EnergySelfConsumptionTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("LogDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Profits")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PvSystemId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("RequestDate")
-                        .HasColumnType("datetime2");
+                    b.Property<decimal>("Savings")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SavingsCO2")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SavingsTravelCar")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SavingsTravelPlane")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SavingsTrees")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

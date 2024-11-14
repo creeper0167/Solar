@@ -30,18 +30,63 @@ namespace Solar.Api.Controllers
             var result = response.Content.ReadFromJsonAsync<AggregateDTO>().Result;
             var pvSystemId = result.PvSystemId;
 
+            result.PvSystemId = pvSystemId;
+            AggregateSubmitDTO aggregateSubmitDTO = new AggregateSubmitDTO();
+            aggregateSubmitDTO.LogDateTime = DateTime.Now;
+            aggregateSubmitDTO.PvSystemId = pvSystemId;
             foreach (var item in result.Data.Channels)
             {
-                AggregateSubmitDTO aggregateDTO = new AggregateSubmitDTO();
-                aggregateDTO.PvSystemId = pvSystemId;
-                aggregateDTO.ChannelName = item.ChannelName;
-                aggregateDTO.ChannelType = item.ChannelType;
-                aggregateDTO.Unit = item.Unit;
-                aggregateDTO.Total = item.Values.Total;
-
-                _aggregateService.AddAggregate(aggregateDTO);
-                _aggregateService.SaveChanges();
+                if (string.Compare(item.ChannelName, "EnergyOutput") == 0)
+                {
+                    aggregateSubmitDTO.EnergyOutput = item.Values.Total;
+                }
+                else if (string.Compare(item.ChannelName, "EnergyDirectConsumption") == 0)
+                {
+                    aggregateSubmitDTO.EnergyDirectConsumption = item.Values.Total;
+                }
+                else if (string.Compare(item.ChannelName, "EnergyProductionTotal") == 0)
+                {
+                    aggregateSubmitDTO.EnergyProductionTotal = item.Values.Total;
+                }
+                else if (string.Compare(item.ChannelName, "EnergySelfConsumptionTotal") == 0)
+                {
+                    aggregateSubmitDTO.EnergySelfConsumptionTotal = item.Values.Total;
+                }
+                else if (string.Compare(item.ChannelName, "EnergyConsumptionTotal") == 0)
+                {
+                    aggregateSubmitDTO.EnergyConsumptionTotal = item.Values.Total;
+                }
+                else if (string.Compare(item.ChannelName, "SavingsCO2") == 0)
+                {
+                    aggregateSubmitDTO.SavingsCO2 = item.Values.Total;
+                }
+                else if (string.Compare(item.ChannelName, "SavingsTrees") == 0)
+                {
+                    aggregateSubmitDTO.SavingsTrees = item.Values.Total;
+                }
+                else if (string.Compare(item.ChannelName, "SavingsTravelCar") == 0)
+                {
+                    aggregateSubmitDTO.SavingsTravelCar = item.Values.Total;
+                }
+                else if (string.Compare(item.ChannelName, "SavingsTravelPlane") == 0)
+                {
+                    aggregateSubmitDTO.SavingsTravelPlane = item.Values.Total;
+                }
+                else if (string.Compare(item.ChannelName, "Profits") == 0)
+                {
+                    aggregateSubmitDTO.Profits = item.Values.Total;
+                }
+                else if (string.Compare(item.ChannelName, "Earnings") == 0)
+                {
+                    aggregateSubmitDTO.Earnings = item.Values.Total;
+                }
+                else if (string.Compare(item.ChannelName, "Savings") == 0)
+                {
+                    aggregateSubmitDTO.Savings = item.Values.Total;
+                }
             }
+            _aggregateService.AddAggregate(aggregateSubmitDTO);
+            _aggregateService.SaveChanges();
 
             return Ok(result);
         }
