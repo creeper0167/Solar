@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Solar.Application.Services.Service.EnergyFlow
 {
-    
+
     public class EnergyFlowService : IEnergyFlowService
     {
         private readonly IEnergyFlowRepository _energyFlowRepository;
@@ -34,9 +34,55 @@ namespace Solar.Application.Services.Service.EnergyFlow
             response.EnsureSuccessStatusCode();
 
             var result = response.Content.ReadFromJsonAsync<EnergyFlowDTO>().Result;
-            //var pvSystemId = result.PvSystemId;
+            var pvSystemId = result.PvSystemId;
 
-            var energyFlow = new EnergyFlowData();
+            var energyFlowData = new EnergyFlowData();
+            foreach (var item in result.Data.Channels)
+            {
+                if (string.Compare(item.ChannelName, "PowerFeedIn") == 0)
+                {
+                    energyFlowData.PowerFeedIn = item.Value;
+                }
+                else if (string.Compare(item.ChannelName, "PowerLoad") == 0)
+                {
+                    energyFlowData.PowerLoad = item.Value;
+                }
+                else if (string.Compare(item.ChannelName, "PowerBattCharge") == 0)
+                {
+                    energyFlowData.PowerBattCharge = item.Value;
+                }
+                else if (string.Compare(item.ChannelName, "PowerPV") == 0)
+                {
+                    energyFlowData.PowerPV = item.Value;
+                }
+                else if (string.Compare(item.ChannelName, "PowerOutput") == 0)
+                {
+                    energyFlowData.PowerOutput = item.Value;
+                }
+                else if (string.Compare(item.ChannelName, "BattSOC") == 0)
+                {
+                    energyFlowData.BattSOC = item.Value;
+                }
+                else if (string.Compare(item.ChannelName, "RateSelfConsumption") == 0)
+                {
+                    energyFlowData.RateSelfConsumption = item.Value;
+                }
+                else if (string.Compare(item.ChannelName, "RateSelfSufficiency") == 0)
+                {
+                    energyFlowData.RateSelfSufficiency = item.Value;
+                }
+                else if (string.Compare(item.ChannelName, "PowerEVCTotal") == 0)
+                {
+                    energyFlowData.PowerEVCTotal = item.Value;
+                }
+                else if (string.Compare(item.ChannelName, "PowerOhmpilot") == 0)
+                {
+                    energyFlowData.PowerOhmpilot = item.Value;
+                }
+            }
+            _energyFlowRepository.Add(energyFlowData);
+            _energyFlowRepository.SaveChanges();
+
 
             //foreach (var item in result.Data.Channels)
             //{
@@ -48,13 +94,13 @@ namespace Solar.Application.Services.Service.EnergyFlow
             //    try
             //    {
             //        _energyFlowRepository.Add(energyFlow);
-                    
+
             //        _energyFlowRepository.SaveChanges();
             //    }
             //    catch (Exception e) { }
             //}
 
-                return result;
+            return result;
         }
     }
 }

@@ -11,5 +11,7 @@ namespace Solar.Domain.Equipment
         public int PowerType { get; set; }
         public string PictureAddress { get; set; }
         public string Description { get; set; }
+        public int Keyuser { get; set; }
+
     }
 }

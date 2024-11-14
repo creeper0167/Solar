@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solar.Api", "Solar\Solar.Api.csproj", "{04AE3BFC-A66B-4128-9321-967EC397BBCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solar.Api", "Solar\Solar.Api.csproj", "{04AE3BFC-A66B-4128-9321-967EC397BBCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solar.Infrastructure", "Solar.Infrastructure\Solar.Infrastructure.csproj", "{D80409E8-C7A0-45EB-AE1F-3B5CC6A343EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solar.Infrastructure", "Solar.Infrastructure\Solar.Infrastructure.csproj", "{D80409E8-C7A0-45EB-AE1F-3B5CC6A343EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solar.Application", "Solar.Application\Solar.Application.csproj", "{BE0DA424-1802-4E67-A0A8-968CF0C3719D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solar.Application", "Solar.Application\Solar.Application.csproj", "{BE0DA424-1802-4E67-A0A8-968CF0C3719D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solar.Domain", "Solar.Domain\Solar.Domain.csproj", "{BB180921-C6D2-49CF-8E60-3E6510766001}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solar.Domain", "Solar.Domain\Solar.Domain.csproj", "{BB180921-C6D2-49CF-8E60-3E6510766001}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

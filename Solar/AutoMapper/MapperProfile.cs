@@ -1,7 +1,12 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Solar.Application.DTOs;
+
+using Solar.Application.DTOs.User;
+
 using Solar.Domain.Agg;
+
 using Solar.Domain.Equipment;
+using Solar.Domain.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;

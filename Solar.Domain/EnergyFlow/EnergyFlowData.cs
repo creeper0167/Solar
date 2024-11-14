@@ -13,7 +13,7 @@ namespace Solar.Domain.EnergyFlow
         public decimal? PowerLoad { get; set; }
         public decimal? PowerBattCharge { get; set; }
         public decimal? PowerPV { get; set; }
-        public decimal? PowerOutput { get; set; }    
+        public decimal? PowerOutput { get; set; }
         public decimal? BattSOC { get; set; }
         public decimal? RateSelfConsumption { get; set; }
         public decimal? RateSelfSufficiency { get; set; }
