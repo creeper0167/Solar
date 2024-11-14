@@ -42,7 +42,7 @@ namespace Solar.Application.Services.Service.EnergyFlow
                 var energyFlow = new EnergyFlowData();
                 energyFlow.ChannelName = item.ChannelName;
                 energyFlow.ChannelType = item.ChannelType;
-                energyFlow.Value = item.Values.Total;
+                energyFlow.Value = item.Value;
                 energyFlow.Unit = item.Unit;
                 try
                 {

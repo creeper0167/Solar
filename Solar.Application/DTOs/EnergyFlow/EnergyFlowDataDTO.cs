@@ -9,6 +9,6 @@ namespace Solar.Application.DTOs.EnergyFlow
     public class EnergyFlowDataDTO
     {
         public string logDateTime { get; set; }
-        public List<ChannelDTO> Channels { get; set; }
+        public List<EnergyFlowChannelDTO> Channels { get; set; }
     }
 }
