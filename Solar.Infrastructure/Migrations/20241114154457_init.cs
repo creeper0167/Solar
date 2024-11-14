@@ -35,10 +35,16 @@ namespace Solar.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ChannelName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ChannelType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Value = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    PowerFeedIn = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PowerLoad = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PowerBattCharge = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PowerPV = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PowerOutput = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    BattSOC = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    RateSelfConsumption = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    RateSelfSufficiency = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PowerEVCTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PowerOhmpilot = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -12,8 +12,8 @@ using Solar.Infrastructure.Context;
 namespace Solar.Infrastructure.Migrations
 {
     [DbContext(typeof(SolarDbContext))]
-    [Migration("20241111062710_change-value-type2")]
-    partial class changevaluetype2
+    [Migration("20241114154457_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,19 +68,34 @@ namespace Solar.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ChannelName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal?>("BattSOC")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ChannelType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal?>("PowerBattCharge")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal?>("PowerEVCTotal")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal?>("Value")
+                    b.Property<decimal?>("PowerFeedIn")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("PowerLoad")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("PowerOhmpilot")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("PowerOutput")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("PowerPV")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("RateSelfConsumption")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("RateSelfSufficiency")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
