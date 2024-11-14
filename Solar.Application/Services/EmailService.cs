@@ -21,8 +21,8 @@ namespace Solar.Application.Services
             email.Body = new TextPart(TextFormat.Html) { Text = "<h1>" + body + "</h1>" };
 
             using var smtp = new SmtpClient();
-            smtp.Connect("smtp.ethereal.email", 587, MailKit.Security.SecureSocketOptions.StartTls);
-            smtp.Authenticate("shyann.swift17@ethereal.email", "qQtmXTHHsv13AJsMpm");
+            smtp.Connect("23.88.115.132", 587, MailKit.Security.SecureSocketOptions.None);
+            smtp.Authenticate("bahman@wvpp.com.au", "123456");
             smtp.Send(email);
             smtp.Disconnect(true);
         }
