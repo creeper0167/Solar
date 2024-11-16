@@ -22,7 +22,10 @@ namespace Solar.Application.AutoMapper
             CreateMap<EquipmentDTO, Equipment>().ReverseMap();
 
             CreateMap<AggregateSubmitDTO, Aggregate>().ReverseMap();
-            
+
+            CreateMap<User, RegisterRequestDTO>().ReverseMap();
+
+
         }
     }
 }

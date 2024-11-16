@@ -8,7 +8,7 @@ namespace Solar.Domain.Agg
 {
     public class Aggregate : BaseEntity
     {
-        public string PvSystemId { get; set; }
+        //public string PvSystemId { get; set; }
         public decimal EnergyOutput { get; set; }
         public decimal EnergyDirectConsumption { get; set; }
         public decimal EnergyProductionTotal { get; set; }
