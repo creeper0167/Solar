@@ -38,7 +38,7 @@ public class AuthenticationController : Controller
             });
 
         var result = _userService.GetUserByEmail(user.Email);
-        var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes( "OurVerifyAmini"));
+        var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes( "OurVerifyAmini aiohfdiuh asb asvb"));
         var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
         var tokenOption = new JwtSecurityToken(
