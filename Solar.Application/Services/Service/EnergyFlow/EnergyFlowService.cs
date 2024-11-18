@@ -80,25 +80,9 @@ namespace Solar.Application.Services.Service.EnergyFlow
                     energyFlowData.PowerOhmpilot = item.Value;
                 }
             }
+            energyFlowData.RequestDateTime = DateTime.Now;
             _energyFlowRepository.Add(energyFlowData);
             _energyFlowRepository.SaveChanges();
-
-
-            //foreach (var item in result.Data.Channels)
-            //{
-            //    var energyFlow = new EnergyFlowData();
-            //    energyFlow.ChannelName = item.ChannelName;
-            //    energyFlow.ChannelType = item.ChannelType;
-            //    energyFlow.Value = item.Value;
-            //    energyFlow.Unit = item.Unit;
-            //    try
-            //    {
-            //        _energyFlowRepository.Add(energyFlow);
-
-            //        _energyFlowRepository.SaveChanges();
-            //    }
-            //    catch (Exception e) { }
-            //}
 
             return result;
         }

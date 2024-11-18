@@ -19,5 +19,6 @@ namespace Solar.Domain.EnergyFlow
         public decimal? RateSelfSufficiency { get; set; }
         public decimal? PowerEVCTotal { get; set; }
         public decimal? PowerOhmpilot { get; set; }
+        public DateTime? RequestDateTime { get; set; }
     }
 }

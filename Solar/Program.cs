@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.IdentityModel.Tokens;
+using Quartz;
+using Solar.Application.BackgroundJob;
 using Solar.Infrastructure.Context;
 using Solar.Infrastructure.IOC;
 using System.Text;
@@ -17,6 +19,26 @@ builder.Services.AddSwaggerGen();
 
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(Program));
+
+//Quartz
+builder.Services.AddQuartz(configure =>
+{
+    configure.UseMicrosoftDependencyInjectionJobFactory();
+
+    var jobKey = new JobKey(nameof(ProcessRequest));
+
+    configure
+    .AddJob<ProcessRequest>(jobKey)
+    .AddTrigger(
+            trigger => trigger.ForJob(jobKey).WithSimpleSchedule(
+                schedule => schedule.WithIntervalInSeconds(5).RepeatForever()));
+});
+
+builder.Services.AddQuartzHostedService(configure =>
+{
+    configure.WaitForJobsToComplete = true;
+});
+
 //JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
