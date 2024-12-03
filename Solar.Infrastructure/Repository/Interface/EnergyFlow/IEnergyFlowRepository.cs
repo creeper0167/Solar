@@ -11,6 +11,7 @@ namespace Solar.Infrastructure.Repository.Interface.EnergyFlow
     {
 
         void Add(EnergyFlowData energyFlow);
+        EnergyFlowData GetLast();
         void SaveChanges();
     }
 }

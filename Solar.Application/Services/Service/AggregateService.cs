@@ -27,6 +27,13 @@ namespace Solar.Application.Services.Service
             result.LogDateTime = DateTime.Now;
             _aggregateRepository.Add(result);
         }
+
+        public Aggregate GetLast()
+        {
+           var result = _aggregateRepository.GetLast();
+            return result;
+        }
+
         //public void AddAggregate(AggregateSubmitDTO aggregate)
         //{
         //    var result = _mapper.Map<Aggregate>(aggregate);

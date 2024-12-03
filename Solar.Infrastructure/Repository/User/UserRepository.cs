@@ -35,4 +35,15 @@ public class UserRepository : IUserRepository
     {
         _context.SaveChanges();
     }
+
+    public bool CheckDuplicateEmail(string email)
+    {
+        var user = _context.Users.Where(i=>string.Compare(i.Email, email) == 0).FirstOrDefault()?.Email;
+
+        if (!string.IsNullOrEmpty(user))
+        {
+            return true;
+        }
+        return false;
+    }
 }

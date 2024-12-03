@@ -29,12 +29,12 @@ public class AuthenticationController : Controller
     public async Task<IActionResult> Login([FromBody] LoginDTO user)
     {
         if (!_userService.IsValidUser(user.Email, user.Password))
-            return Unauthorized(new {status = 401});
+            return Unauthorized(new {status = 401,message = "Your email or password is incorrect!"});
 
         if (!_userService.IsEmailConfirmed(user.Email))
             return Ok(new
             {
-                message = "Your email is not confirmed yet"
+                message = "Your email is not confirmed yet!"
             });
 
         var result = _userService.GetUserByEmail(user.Email);
@@ -46,7 +46,8 @@ public class AuthenticationController : Controller
             claims: new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Email),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(ClaimTypes.Role, "Admin"),
+                new Claim("userId", result.Id.ToString())
             },
             expires: DateTime.Now.AddMinutes(30),
             signingCredentials: signinCredentials
@@ -62,16 +63,19 @@ public class AuthenticationController : Controller
     [HttpPost("Register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequestDTO requestDTO)
     {
-        _userService.Register(requestDTO);
+        var result = _userService.Register(requestDTO);
         
 
-        return Ok();
+        return Ok(new
+        {
+            result = result
+        });
     }
 
-    [HttpGet("ConfirmEmail")]
-    public IActionResult ConfirmEmail(string userEmail, string verifyEmailText)
+    [HttpPost("ConfirmEmail")]
+    public IActionResult ConfirmEmail([FromBody] EmailConfirmDTO emailConfirmDTO)
     {
-        if(_userService.ConfirmEmail(userEmail, verifyEmailText))
+        if(_userService.ConfirmEmail(emailConfirmDTO.userEmail, emailConfirmDTO.verifyEmailText))
             return Ok(new
             {
                 message = "Email Confirmed!"

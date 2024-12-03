@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Solar.Application.DTOs.EnergyFlow;
+using Solar.Domain.EnergyFlow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Solar.Application.Services.Interfaces.EnergyFlow
     public interface IEnergyFlowService
     {
         public Task<ActionResult<EnergyFlowDTO>> GetFlowData();
+        EnergyFlowData GetLast();
     }
 }

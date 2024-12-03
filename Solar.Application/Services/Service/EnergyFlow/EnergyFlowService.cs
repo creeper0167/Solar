@@ -86,5 +86,11 @@ namespace Solar.Application.Services.Service.EnergyFlow
 
             return result;
         }
+
+        public EnergyFlowData GetLast()
+        {
+            var result = _energyFlowRepository.GetLast();
+            return result;
+        }
     }
 }

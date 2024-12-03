@@ -22,5 +22,6 @@ namespace Solar.Api.Controllers.EnergyFlow.Get
                 result = results
             });
         }
+        //[HttpGet("")]
     }
 }

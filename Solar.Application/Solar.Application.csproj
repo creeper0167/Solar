@@ -33,4 +33,8 @@
     <ProjectReference Include="..\Solar.Infrastructure\Solar.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\Dashboard\" />
+  </ItemGroup>
+
 </Project>

@@ -21,6 +21,11 @@ namespace Solar.Infrastructure.Repository
             _context.Aggregates.Add(aggregate);
         }
 
+        public Aggregate GetLast()
+        {
+            return _context.Aggregates.OrderByDescending(i => i.Id).FirstOrDefault();
+        }
+
         public void SaveChanges()
         {
             _context.SaveChanges();

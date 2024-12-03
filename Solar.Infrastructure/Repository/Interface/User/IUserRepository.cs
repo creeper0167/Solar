@@ -7,4 +7,5 @@ public interface IUserRepository
     Domain.User.User GetByUserEmail(string userEmail);
     void InsertAsync(Domain.User.User user);
     void SaveChanges();
+    bool CheckDuplicateEmail(string email);
 }

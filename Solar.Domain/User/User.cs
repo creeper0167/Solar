@@ -1,3 +1,4 @@
+using Solar.Domain.Equipment;
 using System.ComponentModel.DataAnnotations;
 
 namespace Solar.Domain.User;
@@ -13,5 +14,7 @@ public class User : BaseEntity
     public string RefreshToken { get; set; } = string.Empty;
     public bool EmailConfirmed { get; set; } = false;
     public string EmailConfirmText { get; set; } = "";
+
+    public virtual List<Equipment.Equipment> Equipments { get; set; }
 }
 

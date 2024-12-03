@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Solar.Infrastructure.Repository.EnergyFlow
 {
-    public class EnergyFlowRepository : IEnergyFlowRepository
+    public class EnergyFlowRepository : IEnergyFlowRepository 
     {
         private readonly SolarDbContext _context;
         public EnergyFlowRepository(SolarDbContext context)
@@ -19,6 +19,11 @@ namespace Solar.Infrastructure.Repository.EnergyFlow
         public void Add(EnergyFlowData energyFlow)
         {
             _context.EnergyFlowDatas.Add(energyFlow);
+        }
+
+        public EnergyFlowData GetLast()
+        {
+            return _context.EnergyFlowDatas.OrderByDescending(i => i.Id).FirstOrDefault();
         }
 
         public void SaveChanges()
