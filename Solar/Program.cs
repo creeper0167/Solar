@@ -93,8 +93,8 @@ void RegisterServices(IServiceCollection services)
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost",
-        builder => builder.WithOrigins("http://localhost:3000")  // „»œ« „Ã«“
+    options.AddPolicy("AllowAll",
+        builder => builder.AllowAnyOrigin()  // „»œ« „Ã«“
                         .AllowAnyHeader()
                         .AllowAnyMethod());
 });
@@ -107,7 +107,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors("AllowLocalhost");
+app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

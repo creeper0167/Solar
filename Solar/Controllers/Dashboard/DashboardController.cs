@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Solar.Application.DTOs.User;
 using Solar.Application.Services.Interface;
 using Solar.Application.Services.Interfaces.EnergyFlow;
 
 namespace Solar.Api.Controllers.Dashboard
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class DashboardController : Controller
@@ -15,12 +18,12 @@ namespace Solar.Api.Controllers.Dashboard
             _energyFlowService = energyFlowService;
             _aggregateService = aggregateService;
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var aggregate = _aggregateService.GetLast();
-            var energyFlow = _energyFlowService.GetLast();
+            var aggregate = _aggregateService.GetLast(); //TODO: ورودی پذیرد
+            var energyFlow = _energyFlowService.GetLast(); //TODO: ورودی پذیرد
 
             return Ok(new
             {
@@ -30,6 +33,11 @@ namespace Solar.Api.Controllers.Dashboard
                 SavingCO2 = aggregate.SavingsCO2,
                 PowerPv = energyFlow.PowerPV
             });
+        }
+        [HttpPut]
+        public async Task<IActionResult> Edit(UserUpdateDTO userUpdateDTO)
+        {
+            return Ok();
         }
     }
 }
