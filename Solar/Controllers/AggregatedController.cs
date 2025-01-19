@@ -90,5 +90,22 @@ namespace Solar.Api.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("Years")]
+        public async Task<IActionResult> GetAggregateYear()
+        {
+            //request
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://api.solarweb.com/swqapi/pvsystems/8a5788a9-987a-4413-976d-691dd9c13aeb/aggdata/years");
+            request.Headers.Add("AccessKeyId", "FKIA89D5AC35AF014EE5AED542CFA2DED97D");
+            request.Headers.Add("AccessKeyValue", "1c0d5416-fcdc-4ff0-a974-7de953602dfb");
+            request.Headers.Add("Cookie", "TS0153f740=015bdaa268480e92fd2da9a5f0b51e5522c95f0f666dc2f8077afbd10122c3e42e678fef2460304919f51f4e1b84ac2d63dbcbc1fe61c4e9c46dde11aacfa5146d00b667c1; lbc=!S1YGjYObxrF4zgADh2dzVc1rNXSSvYcwl6zjovsciljLXzqmDJGvw23WUX5JAF2/m3TxuBIs5GkAKfJFfU8+U5TEJ3Z+DkeZSbuOFb0TeAA=");
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
+
+            //--
+            return Ok();
+        }
     }
 }

@@ -34,6 +34,8 @@ namespace Solar.Api.Controllers.Dashboard
                 PowerPv = energyFlow.PowerPV
             });
         }
+
+
         [HttpPut]
         public async Task<IActionResult> Edit(UserUpdateDTO userUpdateDTO)
         {
