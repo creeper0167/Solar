@@ -10,6 +10,7 @@ namespace Solar.Infrastructure.Repository.Interface
     public interface IAggregateRepository
     {
         void Add(Aggregate aggregate);
+        Aggregate GetLast();
         void SaveChanges();
     }
 }

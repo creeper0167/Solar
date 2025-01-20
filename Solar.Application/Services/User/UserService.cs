@@ -49,20 +49,26 @@ public class UserService : IUserService
 
         return new LoginResponseDTO()
         {
+            Id = response.Id,
             RefreshToken = "refresh"
         };
     }
 
-    public void Register(RegisterRequestDTO requestDTO)
+    public string Register(RegisterRequestDTO requestDTO)
     {
         var user = _mapper.Map<Domain.User.User>(requestDTO);
         user.Password = GenerateHashPassword(user.Password);
         user.EmailConfirmText = Guid.NewGuid().ToString();
-
+        //check duplicate email
+        if (_userRepository.CheckDuplicateEmail(user.Email))
+        {
+            return "Email account is duplicate";
+        }
         _userRepository.InsertAsync(user);
         _userRepository.SaveChanges();
 
         _emailService.SendEmail(user.Email, user.EmailConfirmText);
+        return "Ok";
     }
 
     private string GenerateHashPassword(string password)

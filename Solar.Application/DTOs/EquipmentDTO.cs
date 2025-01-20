@@ -8,6 +8,8 @@ namespace Solar.Application.DTOs
 {
     public class EquipmentDTO
     {
+        public int UserId { get; set; }
+        public string PvSystemId { get; set; }
         public int PowerType{get;set;}
         public string PictureAddress { get; set; }
         public string Description { get; set; }

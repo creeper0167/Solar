@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Solar.Application;
 using Solar.Application.DTOs;
 
@@ -13,7 +14,7 @@ namespace Solar.Api.Controllers
         {
             _equipmentService = equipmentService;
         }
-
+        [Authorize]
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
@@ -24,10 +25,11 @@ namespace Solar.Api.Controllers
                 status = 200
             });
         }
-
+        [Authorize]
         [HttpPost("AddEquipment")]
         public async Task<IActionResult> Add(EquipmentDTO equipmentDTO)
         {
+            equipmentDTO.UserId = Int32.Parse(HttpContext.User.FindFirst("userId")?.Value);
             _equipmentService.Add(equipmentDTO);
             _equipmentService.SaveChanges();
             return Ok(new

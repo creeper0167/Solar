@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Solar.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using Solar.Infrastructure.Context;
 namespace Solar.Infrastructure.Migrations
 {
     [DbContext(typeof(SolarDbContext))]
-    partial class SolarDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241116105434_solaar")]
+    partial class solaar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,9 +118,6 @@ namespace Solar.Infrastructure.Migrations
                     b.Property<decimal?>("RateSelfSufficiency")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime?>("RequestDateTime")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.ToTable("EnergyFlowDatas");
@@ -132,26 +132,20 @@ namespace Solar.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Keyuser")
+                    b.Property<int>("Keyuser")
                         .HasColumnType("int");
 
                     b.Property<string>("PictureAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PowerType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PvSystemId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
+                    b.Property<int>("PowerType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Equipments");
                 });
@@ -194,22 +188,6 @@ namespace Solar.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Solar.Domain.Equipment.Equipment", b =>
-                {
-                    b.HasOne("Solar.Domain.User.User", "User")
-                        .WithMany("Equipments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Solar.Domain.User.User", b =>
-                {
-                    b.Navigation("Equipments");
                 });
 #pragma warning restore 612, 618
         }

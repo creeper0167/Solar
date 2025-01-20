@@ -1,4 +1,5 @@
 ﻿using Solar.Application.DTOs;
+using Solar.Domain.Agg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace Solar.Application.Services.Interface
     {
         void AddAggregate(AggregateSubmitDTO aggregateDTO);
         void SaveChanges();
+
+        Aggregate GetLast();
     }
 }

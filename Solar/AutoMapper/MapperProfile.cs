@@ -1,10 +1,10 @@
 using AutoMapper;
 using Solar.Application.DTOs;
-
+using Solar.Application.DTOs.EnergyFlow;
 using Solar.Application.DTOs.User;
 
 using Solar.Domain.Agg;
-
+using Solar.Domain.EnergyFlow;
 using Solar.Domain.Equipment;
 using Solar.Domain.User;
 using System;
@@ -19,16 +19,15 @@ namespace Solar.Application.AutoMapper
     {
         public MapperProfile()
         {
-            CreateMap<EquipmentDTO, Equipment>();
-            CreateMap<Equipment, EquipmentDTO>();
+            CreateMap<EquipmentDTO, Equipment>().ReverseMap();
 
+            CreateMap<AggregateSubmitDTO, Aggregate>().ReverseMap();
 
-            CreateMap<User,RegisterRequestDTO>();
-            CreateMap<RegisterRequestDTO, User>();
+            CreateMap<User, RegisterRequestDTO>().ReverseMap();
 
-            CreateMap<AggregateSubmitDTO, Aggregate>();
-            CreateMap<Aggregate, AggregateSubmitDTO>();
+            CreateMap<Aggregate, AggregateDTO>().ReverseMap();
 
+            CreateMap<EnergyFlowData, EnergyFlowDTO>().ReverseMap();
         }
     }
 }

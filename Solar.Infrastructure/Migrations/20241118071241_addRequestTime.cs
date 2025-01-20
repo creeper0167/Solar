@@ -6,25 +6,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Solar.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class datetimeaggregate : Migration
+    public partial class addRequestTime : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<DateTime>(
-                name: "RequestDate",
-                table: "Aggregates",
+                name: "RequestDateTime",
+                table: "EnergyFlowDatas",
                 type: "datetime2",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                nullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "RequestDate",
-                table: "Aggregates");
+                name: "RequestDateTime",
+                table: "EnergyFlowDatas");
         }
     }
 }
